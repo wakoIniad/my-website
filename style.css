@@ -14,6 +14,13 @@ body {
   min-width: 99%;
   height: 100%;
   overflow: hidden;
+
+  background: rgb(29,135,134);
+  background: radial-gradient(circle, rgba(29,135,134,1) 0%, rgba(0,0,0,1) 100%);
+}
+
+a {
+  color: rgb(200,255,0)
 }
 
 #canvas { 
@@ -30,8 +37,8 @@ body {
     position:absolute; 
     top:0; 
     left:0; 
-    display:flex;
-    justify-content: center;
+/*    display:flex;
+    justify-content: center;*/
   }
 
 /*canvas {
@@ -41,21 +48,34 @@ body {
   width:100%; 
   height:100%;
   }*/
+#title {
+  text-align:center;
+  background: rgba(200,200,200,0.2);
+}
 
 h1 {
   color: rgb(200,200,200);
   font-family:RBNo2;
   font-size: 300%;
   height: 1em;
-  text-align:center;
-  background: rgba(0,0,0,0.4);
- 
 }
+
+#outline-text {
+  color: rgb(255,255,255);
+}
+
+
 
 .text-image {
   display:inline;
   width:1em;
   height:1em;
+}
+
+.info-section {
+  margin: 2em 1em;
+  width: calc(100%/3);
+  background: rgba(255,255,255,0.5);
 }
   
 @font-face {
