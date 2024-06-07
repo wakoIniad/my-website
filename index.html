@@ -1,36 +1,333 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
+    <meta name="viewport" content="width=device-width">
+    <title>自己紹介</title>
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://raw.githubusercontent.com/wakoIniad/my-website/150f4077ada226d628f988281a7be1a2daa0067e/image/favicon.svg">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8" />
     
-    <link rel="icon" href="image/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&family=Rampart+One&display=swap" rel="stylesheet">  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&family=M+PLUS+2:wght@100..900&family=Rampart+One&display=swap" rel="stylesheet"> 
   </head>
   <body>
-    <script id="canvas" src="sketch.js"></script>
+    <script id="canvas">
+        let animationSpeed;//more bigger,more slower
+        const x = [];
+        const y = [];
+
+        function setup() {
+        const count = 100;
+        const minSide = min(windowWidth, windowHeight);
+        //createCanvas(minSide, minSide,);
+        createCanvas(windowWidth, windowHeight)
+        
+        animationSpeed = calcRate(width,height,count);
+        console.log(animationSpeed)
+        const maxium = 
+        (-1+((1+4*count/PI)**0.5))/2;
+        for(var i = 0; i < maxium;i++) {
+            for(var j = 0;j < maxium;j++) { 
+            const rad = radians(random(360));
+            const r = random((width/2)**2)**0.5;
+            x.push(width/2+sin(rad)*r);
+            y.push(height/2+cos(rad)*r);
+            }
+        }
+        strokeWeight(1);
+        stroke(255,25);
+        //fill(230,255,155,2);
+        fill(230,255,155,0);
+        }
+
+        function draw() {
+        const c = 3
+        background(5.2/c,84/c,100/c,64);
+        const xlength = x.length;
+        
+        for(var i = 0;i < xlength;i++) {
+          const last = (i -1 + xlength)%xlength;
+          const dx = x[i]-x[last];
+          const dy = y[i]-y[last];
+          const r = (dx**2 + dy**2)*animationSpeed/10;
+          x[i] -= dx/r * 1 / r;
+          y[i] -= dy/r * 1 / r;
+            circle(x[i],y[i],16);
+        }
+        /*for(var i = 0;i < xlength;i++) {
+            const xi = x[i];
+            const yi = y[i];
+            for(var j = i+1;j < xlength;j++) {
+            const dx = x[j]-xi;
+            const dy = y[j]-yi;
+            const r = animationSpeed*(dx**2+dy**2);
+            const dxpr = dx/r;
+            const dypr = dy/r;
+            x[i] += dxpr;
+            y[i] += dypr;
+            x[j] -= dxpr;
+            y[j] -= dypr;
+            }
+            circle(xi,yi,16);
+        }*/
+        }
+
+        //画面サイズが変わっても同じ時間で一点に集まるように引力の係数を調節する、
+        function calcRate(width,height,count) {
+        const gm = (width * height)**0.5;
+        let pos = gm;
+        let i = 0
+        while(true) {
+            if(pos < 0) break
+            pos -= count/pos**2;
+            i++
+        }
+        
+        const DEFAULT_VAL = 170672
+        //referenceTimeRequiredOfAnimation;
+        //time required on default screen size
+        const rate = DEFAULT_VAL/i;
+        return rate;
+        }
+
+    </script>
     <section id="body">
         <div id="title">
           <h1>
-            Wada Kohsei
+            QWERTY
             <image class="text-image" loading="eager" src="https://raw.githubusercontent.com/wakoIniad/my-website/150f4077ada226d628f988281a7be1a2daa0067e/image/favicon.svg" alt="A crow logo. crow is one of my favorite animal."/>
           </h1>
-          <p id="outline-text"><a href="https://www.iniad.org/">INIAD</a>の学生です。</p>
+          <p id="outline-text"><a  target="_blank" href="https://www.iniad.org/">INIAD</a>の学生です。</p>
         </div>
         <div>
-          <section class="info-section">
+        <div class="main-section" id="center-section">
+            <ul id="uul">
+          <li class="info-section" id="1">
             <!-- 同じ大きさの見出しタグを複数使用することはSEO的に問題なくなったらしいので使っています -->
-            <h2>亜伊宇</h2>
-          </section>
-          <section class="info-section">
-            <h2>絵尾可</h2>
-          </section>
-          <section class="info-section">
-            <h2>気苦毛</h2>
-            
-          </section>
+            <h2>好きな動物</h2>
+            <ul class="content">
+                <li><a  target="_blank" href="//www.google.com/search?q=かわいいカラス">
+                    カラス</a></li>
+                <li class="c"><a  target="_blank" href="//www.youtube.com/watch?v=0QPNEduDa-4">
+                    アザラシ</a></li>
+                <li><a  target="_blank" href="//www.google.com/search?q=しばいぬ">
+                    犬</a></li>
+            </ul>
+          </li>
+          <li class="info-section" id="2">
+            <h2>好きな音楽</h2>
+            <ul class="content">
+                <li><a  target="_blank" href="https://www.youtube.com/watch?v=ezME0Wy0OAE">
+                    朝焼けも夕焼けもないんだ</a></li>
+                <li class="c"><a  target="_blank" href="https://www.youtube.com/watch?v=nMnNSU_9G-E">
+                    名のない星が空に堕ちたら (アコースティックアレンジ)
+                </a></li>
+                <li><a  target="_blank" href="https://www.youtube.com/watch?v=3em-J9yYPAo">
+                  千年生きてる
+                </a></li>
+              </ul>
+          </li>
+          <li class="info-section" id="3">
+            <h2>好きな食べ物</h2>
+            <ul class="content">
+                <li><a  target="_blank" href="//www.google.com/search?q=納豆">
+                    納豆</a></li>
+                <li class="c"><a  target="_blank" href="https://www.arashiyama-hanahoko.jp/tohotheater-food/">
+                    映画館のチュロス</a></li>
+                <li><a  target="_blank" href="https://www.google.com/search?q=油淋鶏">油淋鶏</a></li>
+                </ul>
+          </li>
+          </ul>
+        </div>
         </div>
     </section>
+    <style>
+        html {
+    overflow:auto;
+/**    display: flex;
+    justify-content: center;*/
+    font-family: "Rampart One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  }
+
+/**main {
+    width: 100vmin;
+    height: 100vmin;  
+   
+  }
+*/
+body {
+  min-width: 99%;
+  height: 100%;
+  overflow: hidden;
+
+  background: rgb(29,135,134);
+  background: radial-gradient(circle, rgba(29,135,134,1) 0%, rgba(0,0,0,1) 100%);
+}
+
+a {
+  color: rgb(200,255,0);
+  color: white;
+}
+
+#canvas { 
+    width:100%; 
+    height:100%; 
+    position:fixed;    
+    top:0; 
+    left:0; 
+  }
+#body   { 
+    height:100%;
+    width: 100%;
+    
+    position:absolute; 
+    top:0; 
+    left:0; 
+/*    display:flex;
+    justify-content: center;*/
+  }
+#title {
+  text-align:center;
+  background: rgba(200,200,200,0.2);
+  animation: headder-in 2s ease 0s 1;
+}
+
+h1 {
+  color: rgb(200,200,200);
+  font-size: 300%;
+  height: 1em;
+  width: 100%;
+  margin:0 auto;
+  animation: title-in 2s ease 0s 1;
+}
+
+@keyframes headder-in {
+  0% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes title-in {
+  0% {
+    transform: translateX(-50%);
+  }
+}
+
+#outline-text {
+  color: rgb(255,255,255);
+  font-family: "M PLUS 1 Code", monospace;
+}
+
+
+
+.text-image {
+  display:inline;
+  width:1em;
+  height:1em;
+}
+
+.info-section {
+  margin: 2em 0em;
+  color: rgb(200,255,0);
+  background: rgba(55,255,255,0.25);
+  width:100%;
+  height: 100%;;
+  overflow:hidden;
+  transition-duration: .5s;
+  border-radius: 5%;
+  /*border: .5em dashed rgba(222,222,22,0.5);*/
+  padding: 1em;
+  border-left: .5em rgba(200,255,0,0.75) dashed;
+}
+
+.info-section:hover {
+  height: 100%;
+  background: rgba(255,255,255,0.25);
+  border-top: .5em ridge rgba(200,255,0);
+  border-radius: 0%;
+  border-bottom: none;
+  border-left-color: rgba(200,255,0,1)
+}
+
+.info-section .content {
+    display: none;
+}
+
+.info-section:hover .content {
+    display: block;
+    font-family: "M PLUS 1 Code", monospace;
+    font-weight: bold;
+}
+
+
+.info-section:hover .content > li {
+    margin: 0.5em;
+
+}
+
+.info-section a {
+  text-decoration: none;
+}
+
+.info-section .content {
+  color: rgb(200,255,0)
+}
+
+
+.main-section {
+  /*  display: inline-block;*/
+}
+
+#center-section {
+    width: calc(100vmax/3);
+    display: block;
+    margin: auto;
+    max-width: 100vw;
+}
+
+#left-section {
+    width: calc(100%/3);
+}
+
+#right-section {
+    width: calc(100%/3*2);
+}
+
+  
+.info-section:hover h2{
+    background-color: rgba(255,225,0,0);
+    border-style: 0.25em solid rgb(255,255,255);
+    border-radius: 25%;
+    color: rgb(255,255,255);
+}
+
+.info-section:hover h2::before {
+    content: " 》 "
+}
+
+#uul .info-section {
+    list-style: none;
+}
+
+#uul {
+  padding-left:0;
+}
+
+a:not(.c > a) {
+  color: rgb(75,210,235);
+}
+
+li:not(.c) {
+  color: rgb(75,210,235);
+}
+    </style>
   </body>
 </html>
